@@ -22,7 +22,7 @@
 </template>
 
 <script>
-
+import stor from '../../stor/stor.js'
 export default {
   data () {
     const servicemobile = (rule, value, callback) => {
@@ -50,15 +50,16 @@ export default {
   },
   methods: {
     login () {
-      this.$refs.loginForm.validate(valid => {
+      this.$refs.loginForm.validate(async valid => {
         if (valid) {
-          this.$http
-            .post(`http://ttapi.research.itcast.cn/mp/v1_0/authorizations`, this.loginForm)
-            .then(result => { this.$router.push({ path: '/' }) })
-            .catch(() => {
-              this.$alert('请重新输入', '用户名或密码不正确', {
-                confirmButtonText: '确定' })
-            })
+          try {
+            const { data: { data } } = await this.$http.post('authorizations', this.loginForm)
+            stor.setUser(data)
+            this.$router.push({ path: '/' })
+          } catch (e) {
+            this.$alert('请重新输入', '用户名或密码不正确', {
+              confirmButtonText: '确定' })
+          }
         }
       })
     }

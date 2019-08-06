@@ -46,12 +46,12 @@
 <span class="test">江苏传智播客科技教育有限公司</span>
 <el-dropdown class="my-dropdown">
 <span class="el-dropdown-link">
-<img src="../../assets/images/avatar.jpg">下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
+<img :src="photo">{{ name }}<i class="el-icon-arrow-down el-icon--right"></i>
 </span>
 <el-dropdown-menu slot="dropdown">
-<el-dropdown-item icon="el-icon-setting">
+<el-dropdown-item icon="el-icon-setting" @click.native='setting'>
 个人设置</el-dropdown-item>
-<el-dropdown-item icon="el-icon-unlock">
+<el-dropdown-item icon="el-icon-unlock" @click.native='logout'>
 
 退出登录</el-dropdown-item>
 </el-dropdown-menu>
@@ -66,16 +66,30 @@
 </template>
 
 <script>
+import stor from '../../stor/stor.js'
 export default {
   data () {
     return {
-      iscollapse: false
+      iscollapse: false,
+      name: '',
+      photo: ''
     }
   },
   methods: {
     show () {
       this.iscollapse = !this.iscollapse
+    },
+    setting () {
+      this.$router.push('/setting')
+    },
+    logout () {
+      stor.removeUser()
+      this.$router.push('/login')
     }
+  },
+  created () {
+    this.name = stor.getUser().name
+    this.photo = stor.getUser().photo
   }
 }
 </script>
