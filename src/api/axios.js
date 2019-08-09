@@ -1,6 +1,14 @@
 import axios from 'axios'
 import stor from '../stor/stor.js'
+import JSONBIG from 'json-bigint'
 axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0/'
+axios.defaults.transformResponse = [(data) => {
+  try {
+    return JSONBIG.parse(data)
+  } catch (e) {
+    return data
+  }
+}]
 axios.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${stor.getUser().token}`
   return config
