@@ -5,6 +5,8 @@ import home from '@/views/home/home.vue'
 import welcome from '@/views/welcome/welcom.vue'
 import article from '@/views/article/article.vue'
 import notfound from '@/views/404/notfound.vue'
+import publish from '@/views/publish/publish.vue'
+import img from '@/views/img/img.vue'
 import stor from '../stor/stor.js'
 Vue.use(VueRouter)
 const router = new VueRouter({
@@ -15,7 +17,9 @@ const router = new VueRouter({
       component: home,
       children: [
         { path: '', name: 'welcome', component: welcome },
-        { path: '/article', name: 'article', component: article }
+        { path: '/article', name: 'article', component: article },
+        { path: '/publish', name: 'publish', component: publish },
+        { path: '/img', name: 'img', component: img }
       ]
     },
     { path: '*', component: notfound }

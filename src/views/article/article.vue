@@ -2,9 +2,9 @@
 <div>
 <el-card class="box-card">
   <div slot="header" class="clearfix">
-  <mianbao>
+  <mytest>
   内容管理
-  </mianbao>
+  </mytest>
   </div>
   <el-form label-width="60px" size='small'>
   <el-form-item label="状态: ">
@@ -19,14 +19,7 @@
 
   </el-form-item>
   <el-form-item label="频道:" style="margin-right: 10px">
-   <el-select v-model="resparmas.channel_id" placeholder="请选择" clearable>
-    <el-option
-      v-for="item in options"
-      :key="item.id"
-      :label="item.name"
-      :value="item.id">
-    </el-option>
-  </el-select>
+   <mychannel v-model="resparmas.channel_id"></mychannel>
   </el-form-item>
   <el-form-item label="日期:">
      <el-date-picker
@@ -117,18 +110,10 @@ export default {
     }
   },
   created () {
-    this.getChannelOptions()
     this.getArticle()
   },
-  watch: {
-    'resparmas.channel_id': function (newvalue, oldvalue) {
-      if (newvalue === '') {
-        this.resparmas.channel_id = null
-      }
-    }
-  },
-
   methods: {
+
     edit (id) {
       this.$router.push(`/publish/?id=${id}`)
     },
@@ -163,10 +148,7 @@ export default {
       this.resparmas.page = currentpage
       this.getArticle()
     },
-    async getChannelOptions () {
-      const { data: { data } } = await this.$http.get('/channels')
-      this.options = data.channels
-    },
+
     async getArticle () {
       const { data: { data } } = await this.$http.get('/articles', { params: this.resparmas })
       // console.log(data)

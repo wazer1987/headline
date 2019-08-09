@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'mianbao',
+  name: 'mytest',
   data () {
     return {
 
