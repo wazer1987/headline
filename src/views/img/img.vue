@@ -59,7 +59,7 @@ export default {
         per_page: 10
       },
       imgs: [],
-      total: '',
+      total: 0,
       dialogVisible: false,
       imageUrl: null,
       headers: {

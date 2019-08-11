@@ -6,6 +6,9 @@ import router from '@/router'
 import './style/index.less'
 import axios from './api/axios.js'
 import myplugin from '@/components/index.js'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
 Vue.use(ElementUI)
